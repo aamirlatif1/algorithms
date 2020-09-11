@@ -7,39 +7,39 @@ import java.util.List;
 public class FindAllAnagrams {
 
     public static void main(String[] arg) {
-//        System.out.println(findAnagrams("cbaebabacdabc", "abc"));
-        System.out.println(findAnagrams("af", "be"));
+        System.out.println(findAnagrams("cbaebabacdabc", "abc"));
+//        System.out.println(findAnagrams("af", "be"));
     }
 
     // Sliding window - best way
     public static List<Integer> findAnagrams(String s, String p) {
         int lengthS = s.toCharArray().length;
         int lengthP = p.toCharArray().length;
+        List<Integer> list = new ArrayList<Integer>();
         if (lengthS < lengthP) {
-            return new ArrayList();
+            return list;
         }
         HashMap<Character, Integer> hm = new HashMap<Character, Integer>();
         int targetSum = 0;
-        for (int index = 0; index < p.length(); index++) { // Complexity = m, suppose m is length f p
+        for (int index = 0; index < p.length(); index++) { // Complexity = m, suppose m is length of p
             hm.put(p.charAt(index), (int)p.charAt(index));
             targetSum +=  p.charAt(index);
         }
         int sum = 0;
-        List<Integer> list = new ArrayList<Integer>();
-        for (int i = 0; i < lengthS; i++) { // Complexity = n, , suppose n is length f s => [total Complexity = n + m]
-            if(hm.containsKey(s.charAt(i))) { // Complexity = 1, [total Complexity = n + m + 1]
+        for (int i = 0; i < lengthS; i++) { // Complexity = n, suppose n is length of s => [total complexity = n + m]
+            if(hm.containsKey(s.charAt(i))) { // Complexity = 1, [total complexity = n + m + 1]
                 sum += (int) s.charAt(i);
             }
             if (i >= lengthP-1) {
                 if (targetSum == sum) {
                     list.add(i+1-lengthP);
                 }
-                if(hm.containsKey(s.charAt(i+1-lengthP))) { // Complexity = 1, [total Complexity = n + m + 1 + 1]
+                if(hm.containsKey(s.charAt(i+1-lengthP))) { // Complexity = 1, [total complexity = n + m + 1 + 1]
                     sum -= (int) s.charAt(i+1-lengthP);
                 }
             }
         }
-        return list; // total Complexity = n, because n > m
+        return list; // total complexity = n, because n > m
     }
 
     // brute force - simple way
