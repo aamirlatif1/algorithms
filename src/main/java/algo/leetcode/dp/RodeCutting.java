@@ -4,7 +4,7 @@ import java.util.*;
 
 public class RodeCutting {
 
-    private static int[] mem = new int[41];
+    private final static int[] mem = new int[41];
 
     public static int cutRode(int[] p, int n) {
         if (n == 0) return 0;
